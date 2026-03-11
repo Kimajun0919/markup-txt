@@ -25,9 +25,9 @@ const tools = [
 ];
 
 const toolViews = {
-  ai: <AiTxtGenerator />,
-  llms: <LlmsTxtGenerator />,
-  markup: <MarkupSearch />,
+  ai: AiTxtGenerator,
+  llms: LlmsTxtGenerator,
+  markup: MarkupSearch,
 };
 
 export default function App() {
@@ -72,18 +72,29 @@ export default function App() {
 
       <div className="tool-view">
         {tools.map((tool) => (
-          <section
+          <ToolPanel
             key={tool.id}
             id={tool.panelId}
-            role="tabpanel"
-            aria-labelledby={`tab-${tool.id}`}
-            className="tool-panel"
+            labelId={`tab-${tool.id}`}
             hidden={activeTool !== tool.id}
-          >
-            {toolViews[tool.id]}
-          </section>
+            Component={toolViews[tool.id]}
+          />
         ))}
       </div>
     </div>
+  );
+}
+
+function ToolPanel({ id, labelId, hidden, Component }) {
+  return (
+    <section
+      id={id}
+      role="tabpanel"
+      aria-labelledby={labelId}
+      className="tool-panel"
+      hidden={hidden}
+    >
+      <Component />
+    </section>
   );
 }
