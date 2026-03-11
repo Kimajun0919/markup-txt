@@ -36,31 +36,6 @@ export default function MarkupSearch() {
 
   useKeyboard({ closePanel, focusSearch })
 
-  const totalProps = data.reduce((acc, d) => acc + d.properties.length, 0)
-  const hasActiveScope = Boolean(category || hasQuery)
-
-  const summaryItems = [
-    {
-      label: '마크업 타입',
-      value: data.length,
-      hint: 'Google Search 기준 타입 수',
-    },
-    {
-      label: '속성 수',
-      value: totalProps,
-      hint: '전체 속성 레퍼런스',
-    },
-    {
-      label: '현재 탐색',
-      value: hasActiveScope ? filtered.length : 'Ready',
-      hint: hasQuery
-        ? `"${query.trim()}" 검색 결과`
-        : category
-        ? `${category} 범위 탐색`
-        : '카테고리 또는 검색으로 시작',
-    },
-  ]
-
   if (loading) {
     return (
       <div className={styles.loading}>
@@ -80,7 +55,7 @@ export default function MarkupSearch() {
 
   return (
     <div className={styles.app}>
-      <header className="hero panel">
+      <header className="hero hero-single panel">
         <div className="hero-copy">
           <p className="eyebrow">Markup discovery builder</p>
           <h1>구조화 데이터 마크업 탐색기</h1>
@@ -89,16 +64,6 @@ export default function MarkupSearch() {
             정리했습니다. 생성기 화면과 같은 레이아웃으로 맞춰서 전환 시에도
             작업 맥락이 끊기지 않게 구성했습니다.
           </p>
-        </div>
-
-        <div className="hero-stats">
-          {summaryItems.map((item) => (
-            <article key={item.label} className="stat-card">
-              <span className="stat-label">{item.label}</span>
-              <strong className="stat-value">{item.value}</strong>
-              <span className="stat-hint">{item.hint}</span>
-            </article>
-          ))}
         </div>
       </header>
 

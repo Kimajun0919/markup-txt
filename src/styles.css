@@ -275,6 +275,10 @@ textarea:focus {
   padding: 28px;
 }
 
+.hero-single {
+  grid-template-columns: 1fr;
+}
+
 .eyebrow {
   margin: 0 0 10px;
   color: var(--accent);
