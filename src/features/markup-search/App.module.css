@@ -1,15 +1,10 @@
 .app { min-height: 100vh; }
 
-.layout {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.resultsColumn {
+  min-width: 0;
+  display: grid;
+  gap: 20px;
 }
-
-.main { min-width: 0; }
 
 .loading {
   display: flex;
@@ -29,10 +24,3 @@
   animation: spin 0.7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg) } }
-
-@media (max-width: 860px) {
-  .layout {
-    padding: 16px;
-    gap: 18px;
-  }
-}
