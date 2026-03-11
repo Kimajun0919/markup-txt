@@ -36,51 +36,54 @@ export default function App() {
     tools.find((tool) => tool.id === activeTool) ?? tools[0];
 
   return (
-    <div className="page-shell">
-      <nav className="panel suite-nav">
-        <div className="suite-copy">
-          <p className="eyebrow">Unified Markup Workspace</p>
-          <h1>AI TXT & Markup Studio</h1>
-          <p className="hero-description">
-            `ai.txt`, `llms.txt`, 구조화 데이터 타입 탐색을 하나의 프로젝트로
-            묶었습니다. 상단 메뉴에서 기능을 전환해도 각 화면의 입력 상태는
-            유지됩니다.
-          </p>
-          <div className="suite-active-badge">
-            현재 작업: <strong>{activeToolMeta.title}</strong>
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="topbar-inner">
+          <div className="brand-block">
+            <span className="brand-kicker">Unified Workspace</span>
+            <strong className="brand-title">Markup TXT Studio</strong>
           </div>
-        </div>
 
-        <div className="tool-tab-row" role="tablist" aria-label="기능 메뉴">
+          <div className="topbar-status" aria-live="polite">
+            <span className="topbar-status-label">현재 도구</span>
+            <strong className="topbar-status-value">{activeToolMeta.title}</strong>
+          </div>
+
+          <nav className="menu-bar" aria-label="기능 메뉴">
+            <div className="tool-tab-row" role="tablist" aria-label="기능 메뉴">
+              {tools.map((tool) => (
+                <button
+                  key={tool.id}
+                  id={`tab-${tool.id}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTool === tool.id}
+                  aria-controls={tool.panelId}
+                  className={`tool-tab ${activeTool === tool.id ? "is-active" : ""}`}
+                  onClick={() => setActiveTool(tool.id)}
+                >
+                  <strong>{tool.title}</strong>
+                  <span>{tool.description}</span>
+                </button>
+              ))}
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main className="workspace-shell">
+        <div className="tool-view">
           {tools.map((tool) => (
-            <button
+            <ToolPanel
               key={tool.id}
-              id={`tab-${tool.id}`}
-              type="button"
-              role="tab"
-              aria-selected={activeTool === tool.id}
-              aria-controls={tool.panelId}
-              className={`tool-tab ${activeTool === tool.id ? "is-active" : ""}`}
-              onClick={() => setActiveTool(tool.id)}
-            >
-              <strong>{tool.title}</strong>
-              <span>{tool.description}</span>
-            </button>
+              id={tool.panelId}
+              labelId={`tab-${tool.id}`}
+              hidden={activeTool !== tool.id}
+              Component={toolViews[tool.id]}
+            />
           ))}
         </div>
-      </nav>
-
-      <div className="tool-view">
-        {tools.map((tool) => (
-          <ToolPanel
-            key={tool.id}
-            id={tool.panelId}
-            labelId={`tab-${tool.id}`}
-            hidden={activeTool !== tool.id}
-            Component={toolViews[tool.id]}
-          />
-        ))}
-      </div>
+      </main>
     </div>
   );
 }
