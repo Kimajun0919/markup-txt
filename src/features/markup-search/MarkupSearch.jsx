@@ -9,14 +9,13 @@ import DetailPanel from './components/DetailPanel'
 import SearchGuide from './components/SearchGuide'
 import styles from './App.module.css'
 
-export default function App() {
+export default function MarkupSearch() {
   const { data, loading, error } = useData()
   const [category, setCategory] = useState(null)
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(null)
   const [focusedProp, setFocusedProp] = useState('')
   const searchRef = useRef(null)
-  const hasActiveCategory = Boolean(category)
   const hasQuery = Boolean(query.trim())
 
   const filtered = useFilter(data, { category, query })
