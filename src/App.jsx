@@ -5,10 +5,10 @@ import MarkupSearch from "./features/markup-search/MarkupSearch";
 
 const tools = [
   {
-    id: "ai",
-    title: "ai.txt 생성기",
-    description: "AI 크롤러 정책과 사용 규칙을 바로 조합합니다.",
-    panelId: "tool-panel-ai",
+    id: "markup",
+    title: "마크업 타입 검색",
+    description: "구조화 데이터 타입과 속성을 빠르게 탐색합니다.",
+    panelId: "tool-panel-markup",
   },
   {
     id: "llms",
@@ -17,10 +17,10 @@ const tools = [
     panelId: "tool-panel-llms",
   },
   {
-    id: "markup",
-    title: "마크업 타입 검색",
-    description: "구조화 데이터 타입과 속성을 빠르게 탐색합니다.",
-    panelId: "tool-panel-markup",
+    id: "ai",
+    title: "ai.txt 생성기",
+    description: "AI 크롤러 정책과 사용 규칙을 바로 조합합니다.",
+    panelId: "tool-panel-ai",
   },
 ];
 
@@ -31,7 +31,7 @@ const toolViews = {
 };
 
 export default function App() {
-  const [activeTool, setActiveTool] = useState("ai");
+  const [activeTool, setActiveTool] = useState("markup");
   const activeToolMeta =
     tools.find((tool) => tool.id === activeTool) ?? tools[0];
 
